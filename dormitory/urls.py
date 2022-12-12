@@ -14,27 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-import xadmin
-
 from django.contrib import admin
 from django.urls import path
-from xadmin.plugins import xversion
 
 from management.views import SelectView
 from student import views
 
-xadmin.autodiscover()
-xversion.register_models()
 urlpatterns = [
-    path('index/pw/',views.pw),
-    path('index/',views.index),
+    path('index/pw/', views.pw),
+    path('index/', views.info),
     path('index/info/',views.info),
-    path('index/pay/',views.pay),
-    path('index/repair/',views.repair),
-    path('student/',views.login),
+    path('index/pay/', views.pay),
+    path('index/repair/', views.repair),
+    path('index/dormitory/', views.dormitory),
+    path('', views.login),
+    path('student/', views.login),
     path('register/', views.register),
+    path('visit/', views.visit),
     path('logout/', views.logout),
-    path('xadmin/', xadmin.site.urls),
     path('select/building_room/?module=', SelectView.as_view(), name='building_room'),
     path('admin/', admin.site.urls),
 ]

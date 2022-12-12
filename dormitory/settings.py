@@ -23,6 +23,7 @@ SECRET_KEY = '0p#j@i@@miu2iufdf31upr*u=2iiyl6sh#5zb81d7xa2s9uw)5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = ['*',]
 
@@ -30,6 +31,7 @@ ALLOWED_HOSTS = ['*',]
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'management.apps.ManagementConfig',
-    'xadmin',
     'crispy_forms',
     'reversion',
     'student.apps.LoginConfig',
@@ -135,5 +136,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-      os.path.join(BASE_DIR, "static"),
-  ]
+    os.path.join(BASE_DIR, "static"),
+]
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")

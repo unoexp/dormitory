@@ -20,27 +20,27 @@
 	</head>
 
 	<body class="bg-bright3" data-bg-color="bg-bright3">
-		<form class="form-login" action="/register/" method="post">
+		<form class="form-login" action="/visit/" method="post">
 			{% csrf_token %}
 			{% if message %}
 			<div class="alert alert-warning">{{ message }}</div>
 			{% endif %}
-			<h3 class="text-center">注册</h3>
+			<h3 class="text-center">访问申请</h3>
 			<div class="form-group">
 				<label for="name">姓名</label>
-				<input type="text" name="name" class="form-control" id="name" placeholder="name" autofocus required>
+				<input type="text" name="name" class="form-control" id="name" placeholder="姓名" autofocus required>
 			</div>
 			<div class="form-group">
-				<label for="id_username">学号：</label>
-				<input type="text" name='username' class="form-control" id="id_username" placeholder="Username" required>
+				<label for="tel">联系方式</label>
+				<input type="text" name='tel' class="form-control" id="tel" placeholder="电话" required>
 			</div>
 			<div class="form-group">
-				<label for="id_password">密码：</label>
-				<input type="password" name='password' class="form-control" id="id_password" placeholder="Password" required>
+				<label for="rea">访问原因</label>
+				<input type="text" name='rea' class="form-control" id="rea" placeholder="输入访问原因" required>
 			</div>
 			<div class="form-group">
-				<label for="id_password2">再次输入密码：</label>
-				<input type="password" name='password2' class="form-control" id="id_password2" placeholder="Password" required>
+				<label for="date">访问日期</label>
+				<input type="date" name='date' class="form-control" id="date" placeholder="输入访问时间" required>
 			</div>
 
 			<div class="form-group">
@@ -53,7 +53,7 @@
 
 			<div>
 				<button onclick="window.location.href='/student'" class="btn btn-primary float-left">返回</button>
-				<button type="submit" class="btn btn-primary float-right">注册</button>
+				<button type="submit" class="btn btn-primary float-right">提交申请</button>
 			</div>
 
 		</form>
