@@ -165,11 +165,11 @@ def pw(request):
         pwd2 = request.POST.get('pw2', '')
         if pwd1 != pwd2:
             message = '密码不正确！'
-            return render(request, 'index/pw.html', {'message': message})
+            return render(request, 'index/pw.html', {'message': message, 'info': user})
         else:
             user.update(密码=pwd1)
             message = '密码修改成功'
-            return render(request, 'index/pw.html', {'message': message})
+            return render(request, 'index/pw.html', {'message': message, 'info': user})
     return render(request, 'index/pw.html', {'info': user})
 
 def change_info(request):
