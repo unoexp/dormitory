@@ -23,7 +23,8 @@ from student import views
 urlpatterns = [
     path('index/pw/', views.pw),
     path('index/', views.info),
-    path('index/info/',views.info),
+    path('index/info/', views.info),
+    path('index/change_info/', views.change_info),
     path('index/pay/', views.pay),
     path('index/repair/', views.repair),
     path('index/dormitory/', views.dormitory),

@@ -19,3 +19,13 @@ python .\manage.py runserver
 ```
 python.exe .\manage.py runserver 0.0.0.0:8000
 ```
+
+## 创建超级管理员
+
+- 输入命令
+
+```
+python .\manage.py createsuperuser
+```
+
+- 创建完成后可通过`127.0.0.1:8000/admin`进入管理员页面

@@ -30,7 +30,7 @@ class 宿舍楼(models.Model):
 
 class 寝室(models.Model):
     寝室号 = models.CharField(max_length=128, verbose_name='寝室号', primary_key=True)
-    宿舍楼号 = models.ForeignKey(to="宿舍楼", verbose_name='宿舍楼号', on_delete=models.CASCADE)
+    宿舍楼号 = models.ForeignKey(to="宿舍楼", verbose_name='宿舍楼号', on_delete=models.CASCADE, null=True)
     水费余额 = models.FloatField(verbose_name='水费')
     电费余额 = models.FloatField(verbose_name='电费')
     入住人数 = models.IntegerField(verbose_name='入住人数')

@@ -59,6 +59,8 @@ def register(request):
         password = request.POST.get('password')
         password2 = request.POST.get('password2')
         sex = request.POST.get('sex')
+        d_id = request.POST.get('dormitory_num')
+        tel = request.POST.get('phone')
         if password != password2:
             message = '两次输入密码不相同'
             return render(request, 'login/register.html', {'message': message})
@@ -67,10 +69,23 @@ def register(request):
             message = '学号已注册'
             return render(request, 'login/register.html', {'message': message})
         except:
+            try:
+                models.寝室.objects.get(寝室号=d_id)
+            except:
+                obj = {
+                    '寝室号': d_id,
+                    '水费余额': 0,
+                    '电费余额': 0,
+                    '入住人数': 1
+                }
+                models.寝室.objects.create(**obj)
+            d = models.寝室.objects.get(寝室号=d_id)
             obj = {'姓名': name,
                    '性别': sex,
                    '学号': username,
-                   '密码': password
+                   '密码': password,
+                   '联系方式':tel,
+                   '寝室号': d
                    }
             models.学生.objects.create(**obj)
             message = '注册成功'
@@ -147,7 +162,7 @@ def pw(request):
         # 判断两次密码是否一致
         message = '请检查填写的内容！'
         pwd1 = request.POST.get('pw1', '')  # 与html中name值一样
-        pwd2 = request.POST.get('pw2', '')  # 与html中name值一样
+        pwd2 = request.POST.get('pw2', '')
         if pwd1 != pwd2:
             message = '密码不正确！'
             return render(request, 'index/pw.html', {'message': message})
@@ -155,9 +170,29 @@ def pw(request):
             user.update(密码=pwd1)
             message = '密码修改成功'
             return render(request, 'index/pw.html', {'message': message})
-    return render(request, 'index/pw.html')
+    return render(request, 'index/pw.html', {'info': user})
+
+def change_info(request):
+    uid = request.session.get('user_id')
+    user = models.学生.objects.filter(学号=uid)
+    if request.method == "POST":
+        name = request.POST.get('name')
+        id = request.POST.get('username')
+        d_id = request.POST.get('dormitory_num')
+        tel = request.POST.get('phone')
+        try:
+            user.update(寝室号=d_id)
+        except:
+            message = '寝室不存在'
+            return render(request, 'index/pw.html', {'message': message, 'info': user})
+        user.update(联系方式=tel)
+        request.session['user_room'] = d_id
+        message = '信息修改成功'
+        return render(request, 'index/pw.html', {'message': message, 'info': user})
+    return render(request, 'index/pw.html', {'info': user})
 
 def dormitory(request):
+    request.session.flush
     room = request.session.get('user_room')
     data_list = models.学生.objects.filter(寝室号=room)
     return render(request, 'index/dormitory.html', {'data_list': data_list})
